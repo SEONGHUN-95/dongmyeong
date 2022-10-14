@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'style.css' %}" />
+<script src ="{% static 'js/home.js' %}?ver=2"></script>
+      <main class="px-3">
+            <h1 id='dday'></h1>
+            {% comment %} <h1 id='leftDay'></h1> {% endcomment %}
+            <p>
+            <div>
+                <progress max="100" id ="per"></progress>
+            </div>
+            <h3 id='percent'></h3>
+        </p>
+      </main>
+
+{% endblock %}

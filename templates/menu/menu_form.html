@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<script src ="{% static 'js/menu.js' %}"></script>
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">메뉴 입력하기</h5>
+    <form name = "menuForm" method='post'>
+        {% csrf_token %}
+        <div id ="menuForm">
+            <div class="mb-3">
+                <label for="date" class="form-label">날짜</label>
+                <input type="date" class="form-control" name="date" id="date" width='50px'>
+            </div>
+            <div class="mb-3">
+                <label for="breakfast" class="form-label">아침</label>
+                <textarea class="form-control" name="breakfast"
+                        id="breakfast" rows="5"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="lunch" class="form-label">점심</label>
+                <textarea class="form-control" name="lunch"
+                        id="lunch" rows="5"></textarea>
+   
+                    </div>
+            <div class="mb-3">
+                <label for="dinner" class="form-label">저녁</label>
+                <textarea class="form-control" name="dinner"
+                        id="dinner" rows="5"></textarea>
+            </div>
+        </div>    
+
+    <button type='submit' class="btn btn-primary">저장하기</button>
+    </form>
+    <button type='button' class="btnAdd">추가하기</button>
+</div>
+{% endblock %}

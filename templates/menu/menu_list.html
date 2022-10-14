@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<script src ="{% static 'js/menu.js' %}"></script>
+<div>
+    <a href='{% url 'menu:get_best_menu' %}'>인기 메뉴 보기</a>
+    <form action="{% url 'menu:setDate' %}" method="GET">
+    {% csrf_token %}
+        <input id='date' name ='date' type="date" max="2023-05-15"/>
+        <input type="submit" value="확인">      
+    </form>
+    <div>
+        {% if menu_list %}
+        {% for menu in menu_list %}
+        <div>
+        <h1>{{ menu.date }}</h1>
+        <h2>아침 : {{ menu.breakfast }}</h2>
+        <h2>점심 : {{ menu.lunch }}</h2>
+        <h2>저녁 : {{ menu.dinner }}</h2>
+        <a href="{% url 'menu:menu_vote' menu.id %}"
+        class="recommend btn btn-sm btn-outline-secondary"> 좋아요
+         <span class="badge rounded-pill bg-success">{{menu.voter.count}}</span>
+         </a>
+        </div>        
+        {% endfor %}
+        {% else %}
+        <h1>메뉴가 없습니다.</h1>
+        {% endif %}
+        </div>
+        <a href='{% url 'menu:menu_create' %}'>메뉴 입력하기</a>
+    </div>    
+    <div>   
+        <!-- 페이징처리 시작 -->
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if menu_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ menu_list.previous_page_number }}">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+            <!-- 다음페이지 -->
+            {% if menu_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ menu_list.next_page_number }}">다음</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+        <!-- 페이징처리 끝 -->
+    </div>
+</div>
+{% endblock %}

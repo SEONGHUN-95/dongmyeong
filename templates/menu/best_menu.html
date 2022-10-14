@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<div class="modal modal-tour position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalTour">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-6 shadow">
+        <div class="modal-body p-5">
+          <h2 class="fw-bold mb-0">Best Menu</h2>
+          <ul class="d-grid gap-4 my-5 list-unstyled">
+            {% if best_list %}
+            {% for menu in best_list %}
+            <li class="d-flex gap-4">
+              <div id="best">
+                <h5 class="mb-0"></h5>
+                <h1>{{ menu.date }}</h1>
+                <h2>아침 : {{ menu.breakfast }} </h2>
+                <h2>점심 : {{ menu.lunch }} </h2>
+                <h2>저녁 : {{ menu.dinner }} </h2>
+                <h3>추천수 : {{ menu.voter.count }} </h3>
+              </div>
+            </li>
+            {% endfor %}
+            {% else %}
+            <h1>베스트 메뉴가 없습니다.</h1>
+            {% endif %}
+          </ul>
+          <a href="{% url 'menu:index' %}" class="btn btn-lg btn-primary mt-5 w-100">닫기</a>
+        </div>
+      </div>
+    </div>
+{% endblock %}
